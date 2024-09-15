@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace APortfolio.DAL.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAppUserExtendingIdentityUser : Migration
+    public partial class AddAppUserExtendingAppUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

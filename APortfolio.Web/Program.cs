@@ -1,6 +1,8 @@
 using APortfolio.DAL.Data;
 using APortfolio.DAL.Entitites;
+using APortfolio.Web.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace APortfolio.Web
@@ -15,10 +17,16 @@ namespace APortfolio.Web
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            // In Program.cs
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+
+
+            builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -40,6 +48,8 @@ namespace APortfolio.Web
 
             app.UseRouting();
 
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

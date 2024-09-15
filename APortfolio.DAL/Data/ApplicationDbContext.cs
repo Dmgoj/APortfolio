@@ -1,4 +1,5 @@
-﻿using APortfolio.DAL.Entitites;
+﻿
+using APortfolio.DAL.Entitites;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
