@@ -4,6 +4,7 @@ using APortfolio.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APortfolio.DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241010095558_SeedPortfolios")]
+    partial class SeedPortfolios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,7 +164,7 @@ namespace APortfolio.DAL.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1152),
+                            CreatedDate = new DateTime(2024, 10, 10, 11, 55, 55, 876, DateTimeKind.Local).AddTicks(3270),
                             Description = "This is the description for Portfolio 1",
                             Title = "Portfolio 1",
                             UserId = "c2c38126-c0ff-46c1-8fc5-23fb21ec07ed"
@@ -169,7 +172,7 @@ namespace APortfolio.DAL.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1201),
+                            CreatedDate = new DateTime(2024, 10, 10, 11, 55, 55, 876, DateTimeKind.Local).AddTicks(3313),
                             Description = "This is the description for Portfolio 2",
                             Title = "Portfolio 2",
                             UserId = "c2c38126-c0ff-46c1-8fc5-23fb21ec07ed"
@@ -177,7 +180,7 @@ namespace APortfolio.DAL.Data.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1204),
+                            CreatedDate = new DateTime(2024, 10, 10, 11, 55, 55, 876, DateTimeKind.Local).AddTicks(3316),
                             Description = "This is the description for Portfolio 3",
                             Title = "Portfolio 3",
                             UserId = "c2c38126-c0ff-46c1-8fc5-23fb21ec07ed"
@@ -215,71 +218,6 @@ namespace APortfolio.DAL.Data.Migrations
                     b.HasIndex("PortfolioId");
 
                     b.ToTable("Projects");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1382),
-                            Description = "Project #1 Portfolio #1",
-                            ImageUrl = "/images/projects/project1.jpeg",
-                            PortfolioId = 1,
-                            Title = "Project #1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1386),
-                            Description = "Project #2 Portfolio #1",
-                            ImageUrl = "/images/projects/project2.jpeg",
-                            PortfolioId = 1,
-                            Title = "Project #2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1388),
-                            Description = "Project #3 Portfolio #1",
-                            ImageUrl = "/images/projects/project3.jpeg",
-                            PortfolioId = 1,
-                            Title = "Project #3"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1391),
-                            Description = "Project #1 Portfolio #2",
-                            ImageUrl = "/images/projects/project4.jpeg",
-                            PortfolioId = 2,
-                            Title = "Project #1"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1393),
-                            Description = "Project #2 Portfolio #2",
-                            ImageUrl = "/images/projects/project5.jpeg",
-                            PortfolioId = 2,
-                            Title = "Project #2"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1395),
-                            Description = "Project #1 Portfolio #3",
-                            ImageUrl = "/images/projects/project6.jpeg",
-                            PortfolioId = 3,
-                            Title = "Project #1"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1397),
-                            Description = "Project #2 Portfolio #3",
-                            ImageUrl = "/images/projects/project7.jpeg",
-                            PortfolioId = 3,
-                            Title = "Project #2"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

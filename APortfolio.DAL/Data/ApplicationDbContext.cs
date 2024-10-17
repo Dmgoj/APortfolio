@@ -1,4 +1,5 @@
 ﻿
+using APortfolio.DAL.Data.Seed;
 using APortfolio.DAL.Entitites;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -18,5 +19,21 @@ namespace APortfolio.DAL.Data
         {
             
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            DbSeeder seeder = new DbSeeder();
+            // Call method to seed your data
+            seeder.Seed(modelBuilder);
+         
+        }
+
+
+
+        
+
+
     }
 }
