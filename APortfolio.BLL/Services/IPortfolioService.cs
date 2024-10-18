@@ -1,13 +1,13 @@
-﻿//using APortfolio.DAL.Entitites;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APortfolio.DAL.Repositories
+
+namespace APortfolio.BLL.Services
 {
-    public interface IPortfolioRepository
+    public interface IPortfolioService
     {
         Task<Portfolio> GetByIdAsync(int id);
         Task<IEnumerable<Portfolio>> GetAllAsync();
@@ -17,5 +17,4 @@ namespace APortfolio.DAL.Repositories
         Task UpdateAsync(Portfolio portfolio);
         Task DeleteAsync(int id);
     }
-
 }

@@ -1,5 +1,5 @@
 using APortfolio.DAL.Data;
-using APortfolio.DAL.Entitites;
+using APortfolio.DAL.Entities;
 using APortfolio.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;

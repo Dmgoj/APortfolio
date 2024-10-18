@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APortfolio.DAL.Entitites
+namespace APortfolio.DAL.Entities
 {
     public class Media
     {

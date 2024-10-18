@@ -1,6 +1,6 @@
 ﻿
 using APortfolio.DAL.Data.Seed;
-using APortfolio.DAL.Entitites;
+using APortfolio.DAL.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
