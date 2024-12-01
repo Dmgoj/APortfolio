@@ -1,8 +1,60 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using System.Security.Claims
+@model IEnumerable<APortfolio.DAL.Entities.Portfolio>
+
+@{
+    ViewData["Title"] = "APortfolio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mb-5">
+    <h1 class="display-1">Welcome</h1>
+    <h1> <a asp-controller="Portfolio" asp-action="Create">Create your portfolio</a></h1> <br/>
+    <h6 >Or Explore Other's Portfolios</h6>
 </div>
+@if (Model == null || !Model.Any())
+{
+    <p>No portfolios found. <a asp-controller="Portfolio" asp-action="Create">Create yours</a>!</p>
+}
+else
+{
+<table class="table">
+    <tbody>
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-4 mb-4">
+                            <!-- Each portfolio item takes 3 columns (4 items per row on medium and larger screens) -->
+                            <div class="card h-100 position-relative">
+                                <!-- Card image with overlay -->
+                                <div class="position-relative" style="height: 200px;">
+                                    <a asp-controller="Portfolio" asp-action="Details" asp-route-id="@item.Id" class="d-block h-100">
+                                        <img src="@item.Image" alt="Portfolio Image"
+                                             class="card-img-top img-fluid"
+                                             style="object-fit: cover; height: 100%; width: 100%;" />
+                                    </a>
+
+                                    <!-- Username overlay -->
+                                    <div class="position-absolute bottom-0 end-0 p-2 bg-dark text-white rounded-start" style="opacity: 0.8;">
+                                        @Html.DisplayFor(modelItem => item.User.Username)
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    @if (User.Identity.IsAuthenticated && User.FindFirstValue(ClaimTypes.NameIdentifier) == item.UserId)
+                                    {
+                                        <!-- Action links -->
+                                        <p class="card-text">
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+                                            <a asp-controller="Portfolio" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+    </tbody>
+</table>
+}
