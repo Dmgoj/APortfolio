@@ -18,6 +18,10 @@ namespace APortfolio.DAL.Entities
         public string LastName { get; set; }
         public string? Bio { get; set; }
         public string? Address { get; set; }
+      //  public string? Image { get; set; }
         public virtual ICollection<Portfolio> Portfolios { get; set; }
+       
+       [Display(Name = "User")]
+        public string Username => $"{FirstName} {LastName}";
     }
 }
