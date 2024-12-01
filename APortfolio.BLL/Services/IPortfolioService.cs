@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,9 @@ namespace APortfolio.BLL.Services
         Task<Portfolio> GetByIdAsync(int id);
         Task<IEnumerable<Portfolio>> GetAllAsync();
         Task<IEnumerable<Portfolio>> GetPortfoliosByUserIdAsync(string userId);
+        Task<Portfolio?> GetPortfolioWithProjectsAsync(int id);
         Task<IEnumerable<Portfolio>> SearchPortfoliosAsync(string keyword);
-        Task AddAsync(Portfolio portfolio);
+        Task AddAsync(string userId,Portfolio portfolio, IFormFile image);
         Task UpdateAsync(Portfolio portfolio);
         Task DeleteAsync(int id);
     }
