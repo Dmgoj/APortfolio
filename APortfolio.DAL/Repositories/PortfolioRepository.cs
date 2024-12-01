@@ -1,4 +1,6 @@
 ﻿using APortfolio.DAL.Data;
+using APortfolio.DAL.Entities;
+
 //using APortfolio.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,12 +22,24 @@ namespace APortfolio.DAL.Repositories
 
         public async Task<Portfolio> GetByIdAsync(int id)
         {
-            return await _context.Portfolios.FindAsync(id);
+            return await _context.Portfolios
+                .Include(p=>p.User)
+                .Include(p => p.Projects)  // Ensure that projects are included
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<Portfolio?> GetPortfolioWithProjectsAsync(int id)
+        {
+            return await _context.Portfolios
+                .Include(p => p.Projects)
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<IEnumerable<Portfolio>> GetAllAsync()
         {
-            return await _context.Portfolios.ToListAsync();
+            return await _context.Portfolios
+         .Include(p => p.User)  // Ensure the User is loaded
+         .ToListAsync();
         }
 
         public async Task<IEnumerable<Portfolio>> GetPortfoliosByUserIdAsync(string userId)
@@ -45,6 +59,8 @@ namespace APortfolio.DAL.Repositories
             await _context.Portfolios.AddAsync(portfolio);
             await _context.SaveChangesAsync();
         }
+
+       
 
         public async Task UpdateAsync(Portfolio portfolio)
         {
