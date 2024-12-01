@@ -17,12 +17,12 @@ namespace APortfolio.DAL.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("APortfolio.DAL.Entitites.AppUser", b =>
+            modelBuilder.Entity("APortfolio.DAL.Entities.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -103,7 +103,7 @@ namespace APortfolio.DAL.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("APortfolio.DAL.Entitites.Media", b =>
+            modelBuilder.Entity("APortfolio.DAL.Entities.Media", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -128,7 +128,7 @@ namespace APortfolio.DAL.Data.Migrations
                     b.ToTable("Medias");
                 });
 
-            modelBuilder.Entity("APortfolio.DAL.Entitites.Portfolio", b =>
+            modelBuilder.Entity("APortfolio.DAL.Entities.Portfolio", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,12 +143,14 @@ namespace APortfolio.DAL.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -161,30 +163,33 @@ namespace APortfolio.DAL.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1152),
+                            CreatedDate = new DateTime(2024, 11, 13, 11, 9, 29, 821, DateTimeKind.Local).AddTicks(7100),
                             Description = "This is the description for Portfolio 1",
+                            Image = "/images/projects/default.jpeg",
                             Title = "Portfolio 1",
                             UserId = "c2c38126-c0ff-46c1-8fc5-23fb21ec07ed"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1201),
+                            CreatedDate = new DateTime(2024, 11, 13, 11, 9, 29, 821, DateTimeKind.Local).AddTicks(7158),
                             Description = "This is the description for Portfolio 2",
+                            Image = "/images/projects/default.jpeg",
                             Title = "Portfolio 2",
                             UserId = "c2c38126-c0ff-46c1-8fc5-23fb21ec07ed"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1204),
+                            CreatedDate = new DateTime(2024, 11, 13, 11, 9, 29, 821, DateTimeKind.Local).AddTicks(7161),
                             Description = "This is the description for Portfolio 3",
+                            Image = "/images/projects/default.jpeg",
                             Title = "Portfolio 3",
                             UserId = "c2c38126-c0ff-46c1-8fc5-23fb21ec07ed"
                         });
                 });
 
-            modelBuilder.Entity("APortfolio.DAL.Entitites.Project", b =>
+            modelBuilder.Entity("APortfolio.DAL.Entities.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -220,7 +225,7 @@ namespace APortfolio.DAL.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1382),
+                            CreatedDate = new DateTime(2024, 11, 13, 11, 9, 29, 821, DateTimeKind.Local).AddTicks(7410),
                             Description = "Project #1 Portfolio #1",
                             ImageUrl = "/images/projects/project1.jpeg",
                             PortfolioId = 1,
@@ -229,7 +234,7 @@ namespace APortfolio.DAL.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1386),
+                            CreatedDate = new DateTime(2024, 11, 13, 11, 9, 29, 821, DateTimeKind.Local).AddTicks(7418),
                             Description = "Project #2 Portfolio #1",
                             ImageUrl = "/images/projects/project2.jpeg",
                             PortfolioId = 1,
@@ -238,7 +243,7 @@ namespace APortfolio.DAL.Data.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1388),
+                            CreatedDate = new DateTime(2024, 11, 13, 11, 9, 29, 821, DateTimeKind.Local).AddTicks(7420),
                             Description = "Project #3 Portfolio #1",
                             ImageUrl = "/images/projects/project3.jpeg",
                             PortfolioId = 1,
@@ -247,7 +252,7 @@ namespace APortfolio.DAL.Data.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1391),
+                            CreatedDate = new DateTime(2024, 11, 13, 11, 9, 29, 821, DateTimeKind.Local).AddTicks(7422),
                             Description = "Project #1 Portfolio #2",
                             ImageUrl = "/images/projects/project4.jpeg",
                             PortfolioId = 2,
@@ -256,7 +261,7 @@ namespace APortfolio.DAL.Data.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1393),
+                            CreatedDate = new DateTime(2024, 11, 13, 11, 9, 29, 821, DateTimeKind.Local).AddTicks(7424),
                             Description = "Project #2 Portfolio #2",
                             ImageUrl = "/images/projects/project5.jpeg",
                             PortfolioId = 2,
@@ -265,7 +270,7 @@ namespace APortfolio.DAL.Data.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1395),
+                            CreatedDate = new DateTime(2024, 11, 13, 11, 9, 29, 821, DateTimeKind.Local).AddTicks(7427),
                             Description = "Project #1 Portfolio #3",
                             ImageUrl = "/images/projects/project6.jpeg",
                             PortfolioId = 3,
@@ -274,7 +279,7 @@ namespace APortfolio.DAL.Data.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2024, 10, 17, 22, 37, 56, 672, DateTimeKind.Local).AddTicks(1397),
+                            CreatedDate = new DateTime(2024, 11, 13, 11, 9, 29, 821, DateTimeKind.Local).AddTicks(7429),
                             Description = "Project #2 Portfolio #3",
                             ImageUrl = "/images/projects/project7.jpeg",
                             PortfolioId = 3,
@@ -415,9 +420,9 @@ namespace APortfolio.DAL.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("APortfolio.DAL.Entitites.Media", b =>
+            modelBuilder.Entity("APortfolio.DAL.Entities.Media", b =>
                 {
-                    b.HasOne("APortfolio.DAL.Entitites.Project", "Project")
+                    b.HasOne("APortfolio.DAL.Entities.Project", "Project")
                         .WithMany("Media")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -426,20 +431,18 @@ namespace APortfolio.DAL.Data.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("APortfolio.DAL.Entitites.Portfolio", b =>
+            modelBuilder.Entity("APortfolio.DAL.Entities.Portfolio", b =>
                 {
-                    b.HasOne("APortfolio.DAL.Entitites.AppUser", "User")
+                    b.HasOne("APortfolio.DAL.Entities.AppUser", "User")
                         .WithMany("Portfolios")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("APortfolio.DAL.Entitites.Project", b =>
+            modelBuilder.Entity("APortfolio.DAL.Entities.Project", b =>
                 {
-                    b.HasOne("APortfolio.DAL.Entitites.Portfolio", "Portfolio")
+                    b.HasOne("APortfolio.DAL.Entities.Portfolio", "Portfolio")
                         .WithMany("Projects")
                         .HasForeignKey("PortfolioId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -459,7 +462,7 @@ namespace APortfolio.DAL.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("APortfolio.DAL.Entitites.AppUser", null)
+                    b.HasOne("APortfolio.DAL.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -468,7 +471,7 @@ namespace APortfolio.DAL.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("APortfolio.DAL.Entitites.AppUser", null)
+                    b.HasOne("APortfolio.DAL.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -483,7 +486,7 @@ namespace APortfolio.DAL.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("APortfolio.DAL.Entitites.AppUser", null)
+                    b.HasOne("APortfolio.DAL.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -492,24 +495,24 @@ namespace APortfolio.DAL.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("APortfolio.DAL.Entitites.AppUser", null)
+                    b.HasOne("APortfolio.DAL.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("APortfolio.DAL.Entitites.AppUser", b =>
+            modelBuilder.Entity("APortfolio.DAL.Entities.AppUser", b =>
                 {
                     b.Navigation("Portfolios");
                 });
 
-            modelBuilder.Entity("APortfolio.DAL.Entitites.Portfolio", b =>
+            modelBuilder.Entity("APortfolio.DAL.Entities.Portfolio", b =>
                 {
                     b.Navigation("Projects");
                 });
 
-            modelBuilder.Entity("APortfolio.DAL.Entitites.Project", b =>
+            modelBuilder.Entity("APortfolio.DAL.Entities.Project", b =>
                 {
                     b.Navigation("Media");
                 });
