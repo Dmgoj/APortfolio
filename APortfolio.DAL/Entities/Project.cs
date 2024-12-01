@@ -14,8 +14,8 @@ namespace APortfolio.DAL.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string ImageUrl { get; set; } // URL for project image
-        public ICollection<Media> Media { get; set; } // List of media items for the project
+        public string ImageUrl { get; set; } = "/images/projects/default.jpeg";// URL for project image
+        public ICollection<Media>? Media { get; set; }
         public int PortfolioId { get; set; } 
         public virtual Portfolio Portfolio { get; set; } 
     }
