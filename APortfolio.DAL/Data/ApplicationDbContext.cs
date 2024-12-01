@@ -8,7 +8,7 @@ namespace APortfolio.DAL.Data
 {
     public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
-        public DbSet<AppUser> AppUsers{ get; set; }
+    
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<Project> Projects{ get; set; }
         public DbSet<Media> Medias { get; set; }
@@ -25,7 +25,7 @@ namespace APortfolio.DAL.Data
             base.OnModelCreating(modelBuilder);
 
             DbSeeder seeder = new DbSeeder();
-            // Call method to seed your data
+           
             seeder.Seed(modelBuilder);
          
         }
