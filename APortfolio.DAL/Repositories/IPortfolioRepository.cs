@@ -12,6 +12,7 @@ namespace APortfolio.DAL.Repositories
         Task<Portfolio> GetByIdAsync(int id);
         Task<IEnumerable<Portfolio>> GetAllAsync();
         Task<IEnumerable<Portfolio>> GetPortfoliosByUserIdAsync(string userId);
+        Task<Portfolio?> GetPortfolioWithProjectsAsync(int portfolioId);
         Task<IEnumerable<Portfolio>> SearchPortfoliosAsync(string keyword);
         Task AddAsync(Portfolio portfolio);
         Task UpdateAsync(Portfolio portfolio);
