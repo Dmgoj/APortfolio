@@ -1,0 +1,67 @@
+﻿@using System.Security.Claims
+
+@model IEnumerable<APortfolio.DAL.Entities.Portfolio>
+
+@{
+    ViewData["Title"] = "Portfolios";
+}
+
+<h1>Portfolios</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        
+    <tr>
+            <td>
+                    <div style="display: flex; align-items: center;">
+                        <!-- Image next to the title -->
+                        <a asp-action="Details" asp-route-id="@item.Id">
+                            <img src="@item.Image" alt="Portfolio Image" style="width: 50px; height: 50px; margin-right: 10px; border-radius: 4px;" />
+                        </a>
+              <a asp-action="Details" asp-route-id="@item.Id">
+                    @Html.DisplayFor(modelItem => item.Title)
+              </a> 
+              </div>
+                </td>
+           <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Username)
+            </td>
+            <td>
+                @if (User.Identity.IsAuthenticated && User.FindFirstValue(ClaimTypes.NameIdentifier) == item.UserId)
+                {
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> *@
+                <a asp-controller="Portfolio" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

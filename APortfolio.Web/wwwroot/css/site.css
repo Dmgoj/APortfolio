@@ -20,3 +20,18 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.circle-image {
+    border-radius: 10%; /* Makes the image circular */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Adds a fogged shadow around the image */
+    overflow: hidden; /* Ensures the circular shape crops the image */
+}
+
+    /*.circle-image::after {
+        content: '';
+        display: block;
+        position: absolute;
+        inset: 0;*/ /* Covers the entire image */
+        /*background: radial-gradient(circle, rgba(255, 255, 255, 0) 100%, rgba(255, 255, 255, 1) 100%);
+        pointer-events: none;*/ /* Ensures the gradient doesn’t interfere with user interaction */
+    /*}*/

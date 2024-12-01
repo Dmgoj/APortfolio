@@ -1,0 +1,81 @@
+﻿@using System.Security.Claims
+
+@model APortfolio.DAL.Entities.Project
+
+@{
+    ViewData["Title"] = "Details";
+    bool isOwner=false;
+    if (User.Identity.IsAuthenticated && User.FindFirstValue(ClaimTypes.NameIdentifier) == @Model.Portfolio.UserId)
+    {
+        isOwner = true;
+    }
+}
+ 
+<div class="container mt-3">
+    <div class="row align-items-center">
+        <!-- Image Section -->
+        <div class="col-auto">
+            <img src="@Model.ImageUrl" alt="Alternate Text" class="img-fluid circle-image" style="height: auto; max-height: 100px; width: auto;" />
+        </div>
+
+        <!-- Title and Description Section -->
+        <div class="col">
+            <h1>@Html.DisplayFor(model => model.Title)</h1>
+            <p class="lead">@Html.DisplayFor(model => model.Description)</p>
+        </div>
+    </div>
+</div>
+<hr />
+
+
+
+
+@if (isOwner)
+{
+    <div class="container mt-5">
+        <h2>Upload Media</h2>
+        <form method="post" asp-action="AddMedia" asp-route-projectId="@Model.Id" enctype="multipart/form-data" class="form-group">
+            <div class="mb-3">
+                <label for="MediaFile" class="form-label">Choose File</label>
+                <input type="file" name="MediaFile" id="MediaFile" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+
+        </form>
+
+    </div>
+    <hr />
+}
+<div>
+    @if (Model.Media != null && Model.Media.Any())
+    {
+        <div class="row">
+            @foreach (var media in Model.Media)
+            {
+                <div class="col-md-3 mb-3">
+                    <div class="card shadow-sm">
+                        <img src="@media.Url" class="card-img-top" alt="Media" style="max-height: 150px; object-fit: cover;" />
+                        @if (isOwner)
+                        {
+                        <div class="card-body text-center">
+                         
+                                <form method="post" asp-action="DeleteMedia" asp-route-id="@media.Id" asp-route-projectId="@Model.Id" class="d-inline">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                           
+                        </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="text-muted">No media uploaded yet.</p>
+    }
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-controller="Portfolio" asp-action="Details" asp-route-id="@Model.PortfolioId">Back to List</a>
+</div>
