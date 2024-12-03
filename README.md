@@ -36,7 +36,7 @@ Non-registered users can browse through available projects, while registered use
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/APortfolio.git
+   git clone https://github.com/Dmgoj/APortfolio.git
    ```
 2. Navigate to the project directory:
   ```bash
