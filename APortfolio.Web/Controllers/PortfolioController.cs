@@ -73,7 +73,6 @@ namespace APortfolio.Web.Controllers
             {
                 // Pass the userId to the service layer
                 await _service.AddAsync(userId, portfolio,image);
-                return RedirectToAction("Index");
             }
             catch (InvalidOperationException ex)
             {
@@ -81,6 +80,8 @@ namespace APortfolio.Web.Controllers
                 ViewData["ErrorMessage"] = ex.Message;
                 return View("Create", portfolio);
             }
+            return RedirectToAction("Index");
+
         }
         //// GET: Portfolios/Edit/5
         //public async Task<IActionResult> Edit(int? id)
