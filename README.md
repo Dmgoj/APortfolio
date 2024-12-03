@@ -27,7 +27,7 @@ Non-registered users can browse through available projects, while registered use
 ## Technology Stack
 - **Backend**: ASP.NET MVC
 - **Database**: SQL Server with Entity Framework Core
-- **Frontend**: Razor Views
+- **Frontend**: Razor Views, Bootstrap
 - **Languages**: C#, HTML, CSS, JavaScript
 
 ---
