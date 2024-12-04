@@ -35,7 +35,7 @@ namespace APortfolio.DAL.Repositories
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task<IEnumerable<Portfolio>> GetAllAsync()
+        public async Task<IEnumerable<Portfolio>> GetAllAsync() //TODO napraviti paging da ne vrati čitavu bazu u memory
         {
             return await _context.Portfolios
          .Include(p => p.User)  // Ensure the User is loaded
