@@ -361,4 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/APortfolio.Web/wwwroot/images/projects
+APortfolio.Web/wwwroot/images/projects/
+ 
+ 
