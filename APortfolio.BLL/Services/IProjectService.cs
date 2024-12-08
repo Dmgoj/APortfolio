@@ -11,12 +11,11 @@ namespace APortfolio.BLL.Services
     {
         Task<Project> GetByIdAsync(int id);
         Task<IEnumerable<Project>> GetAllByPortfolioIdAsync(int portfolioId);
-        Task AddAsync(Project project);
+        Task AddAsync(Project project, IFormFile image);
         Task AddMediaAsync(Media media);
         Task DeleteMediaAsync(int id);
         Task UpdateAsync(Project project);
         Task DeleteAsync(int id);
-        Task<string> SaveImageAsync(IFormFile imageUrl);
     }
 
 }

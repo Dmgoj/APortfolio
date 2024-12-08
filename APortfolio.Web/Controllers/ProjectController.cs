@@ -1,5 +1,4 @@
 ﻿using APortfolio.BLL.Services;
-using APortfolio.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +8,13 @@ namespace APortfolio.Web.Controllers
     {
         private readonly IProjectService _projectService;
         private readonly IPortfolioService _portfolioService;
+        private readonly IFileUploadService _fileUploadService;
 
-        public ProjectController(IProjectService projectService, IPortfolioService portfolioService)
+        public ProjectController(IProjectService projectService, IPortfolioService portfolioService, IFileUploadService fileUploadService)
         {
             _projectService = projectService;
             _portfolioService = portfolioService;
+            _fileUploadService = fileUploadService;
         }
 
         public async Task<IActionResult> Index(int portfolioId)
@@ -40,19 +41,15 @@ namespace APortfolio.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Project project, IFormFile? ImageFile)
+        public async Task<IActionResult> Create(Project project, IFormFile? imageFile)
         {
-            
+
             ModelState.Remove("Portfolio");
             if (ModelState.IsValid)
             {
-                if (ImageFile != null)
-                {
-                    // Handle image upload logic (e.g., save to a folder, update `project.Image` property)
-                    project.ImageUrl = await _projectService.SaveImageAsync(ImageFile);
-                }
+               
 
-                await _projectService.AddAsync(project);
+                await _projectService.AddAsync(project, imageFile);
                 return RedirectToAction("Details", "Portfolio", new { id = project.PortfolioId });
             }
             return RedirectToAction("Details", "Portfolio", new { id = project.PortfolioId });
@@ -71,18 +68,15 @@ namespace APortfolio.Web.Controllers
 
             try
             {
-                
-
-                // Save the media file and associate it with the project
-                var mediaUrl = await _projectService.SaveImageAsync(mediaFile);
+                var mediaUrl = await _fileUploadService.UploadImageAsync(mediaFile);
 
                 // Optionally, add media to the project's media collection or database
                 var media = new Media
                 {
                     ProjectId = projectId,
                     Url = mediaUrl,
-                    
                 };
+
                 await _projectService.AddMediaAsync(media);
 
                 // Redirect back to project details
@@ -99,10 +93,11 @@ namespace APortfolio.Web.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteMedia(int id, int projectId)
         {
-            
+
             await _projectService.DeleteMediaAsync(id);
             return RedirectToAction("Details", new { id = projectId });
         }
+
 
         public async Task<IActionResult> Edit(int id)
         {

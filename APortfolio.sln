@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APortfolio.Web", "APortfoli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APortfolio.DAL", "APortfolio.DAL\APortfolio.DAL.csproj", "{1F50C2B2-66A6-46F0-B53A-471DDB5E14C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APortfolio.BLL", "APortfolio.BLL\APortfolio.BLL.csproj", "{4A83EB26-8C17-4FC1-8627-1E9FF2C7ED50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APortfolio.BLL", "APortfolio.BLL\APortfolio.BLL.csproj", "{4A83EB26-8C17-4FC1-8627-1E9FF2C7ED50}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{74FD32FD-B0EF-4E1A-A4B7-B06CBF89D3D2}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

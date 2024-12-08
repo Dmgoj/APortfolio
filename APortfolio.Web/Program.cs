@@ -38,6 +38,8 @@ namespace APortfolio.Web
             builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
             builder.Services.AddScoped<IProjectService, ProjectService>();
 
+            builder.Services.AddScoped<IFileUploadService, FileUploadService>();
+
 
             builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();

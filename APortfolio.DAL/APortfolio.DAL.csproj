@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UserSecretsId>aefa5fe7-d68c-44a4-8789-631fa188ad4a</UserSecretsId>
   </PropertyGroup>
-
+	
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
