@@ -160,6 +160,7 @@ namespace APortfolio.Web.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var portfolio = await _service.GetByIdAsync(id);
+            
             if (portfolio == null)
             {
                 return NotFound();
@@ -168,10 +169,5 @@ namespace APortfolio.Web.Controllers
             await _service.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
-
-        //private bool PortfolioExists(int id)
-        //{
-        //    return _service.Portfolios.Any(e => e.Id == id);
-        //}
     }
 }

@@ -41,16 +41,13 @@ namespace APortfolio.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Project project, IFormFile? imageFile)
+        public async Task<IActionResult> Create(Project project, IFormFile imageFile)
         {
 
             ModelState.Remove("Portfolio");
             if (ModelState.IsValid)
             {
-               
-
                 await _projectService.AddAsync(project, imageFile);
-                return RedirectToAction("Details", "Portfolio", new { id = project.PortfolioId });
             }
             return RedirectToAction("Details", "Portfolio", new { id = project.PortfolioId });
         }

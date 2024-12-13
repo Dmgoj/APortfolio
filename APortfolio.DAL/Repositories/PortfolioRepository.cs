@@ -35,11 +35,13 @@ namespace APortfolio.DAL.Repositories
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task<IEnumerable<Portfolio>> GetAllAsync() //TODO napraviti paging da ne vrati čitavu bazu u memory
+        public async Task<IEnumerable<Portfolio>> GetAllAsync(int pageNumber, int pageSize) //TODO napraviti paging da ne vrati čitavu bazu u memory
         {
-            return await _context.Portfolios
-         .Include(p => p.User)  // Ensure the User is loaded
-         .ToListAsync();
+            var query = _context.Portfolios
+                .Include(p => p.User)  
+                .AsNoTracking();
+
+            return await PaginatedList<Portfolio>.CreateAsync(query, pageNumber, pageSize);
         }
 
         public async Task<IEnumerable<Portfolio>> GetPortfoliosByUserIdAsync(string userId)

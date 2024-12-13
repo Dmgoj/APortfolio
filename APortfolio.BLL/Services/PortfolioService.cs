@@ -23,7 +23,6 @@ namespace APortfolio.BLL.Services
             _portfolioRepository = portfolioRepository;
             _fileUploadService = fileUploadService;
             _userManager = userManager;
-         
         }
 
         public async Task<Portfolio> GetByIdAsync(int id)
@@ -34,7 +33,6 @@ namespace APortfolio.BLL.Services
         public async Task<IEnumerable<Portfolio>> GetAllAsync()
         {
             return await _portfolioRepository.GetAllAsync();
-      
         }
 
         public async Task<IEnumerable<Portfolio>> GetPortfoliosByUserIdAsync(string userId)
@@ -54,8 +52,8 @@ namespace APortfolio.BLL.Services
 
         public async Task AddAsync(string userId, Portfolio portfolio, IFormFile image)
         {
-            // Check if the user already has a portfolio
             var existingPortfolio = await _portfolioRepository.GetPortfoliosByUserIdAsync(userId);
+
             if (existingPortfolio.Any())
             {
                 throw new InvalidOperationException("A user can only have one portfolio.");
@@ -65,9 +63,7 @@ namespace APortfolio.BLL.Services
             portfolio.CreatedDate = DateTime.UtcNow; 
             var imageFileName = await _fileUploadService.UploadImageAsync(image);
             portfolio.Image = imageFileName; 
-            
 
-            // Now add the portfolio to the repository
             await _portfolioRepository.AddAsync(portfolio);
         }
 
