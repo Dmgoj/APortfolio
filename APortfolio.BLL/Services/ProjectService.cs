@@ -56,7 +56,7 @@ namespace APortfolio.BLL.Services
         public async Task AddAsync(Project project, IFormFile image)
         {
             project.CreatedDate = DateTime.UtcNow;
-            project.ImageUrl = await _fileUploadService.UploadImageAsync(image);
+            project.ImageUrl = await _fileUploadService.UploadMediaAsync(image);
             await _projectRepository.AddAsync(project);
         }
 
