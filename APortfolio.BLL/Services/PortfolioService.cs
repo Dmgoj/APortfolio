@@ -1,4 +1,5 @@
-﻿using APortfolio.DAL.Repositories;
+﻿using APortfolio.BLL.Helpers;
+using APortfolio.DAL.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -30,9 +31,10 @@ namespace APortfolio.BLL.Services
             return await _portfolioRepository.GetByIdAsync(id);
         }
 
-        public async Task<IEnumerable<Portfolio>> GetAllAsync()
+        public async Task<PaginatedList<Portfolio>> GetPaginatedPortfoliosAsync(int pageNumber, int pageSize)
         {
-            return await _portfolioRepository.GetAllAsync();
+            var query =  _portfolioRepository.GetAllAsQueryable();
+            return await PaginatedList<Portfolio>.CreateAsync(query, pageNumber, pageSize);
         }
 
         public async Task<IEnumerable<Portfolio>> GetPortfoliosByUserIdAsync(string userId)
@@ -61,7 +63,7 @@ namespace APortfolio.BLL.Services
 
             portfolio.UserId = userId;
             portfolio.CreatedDate = DateTime.UtcNow; 
-            var imageFileName = await _fileUploadService.UploadImageAsync(image);
+            var imageFileName = await _fileUploadService.UploadMediaAsync(image);
             portfolio.Image = imageFileName; 
 
             await _portfolioRepository.AddAsync(portfolio);

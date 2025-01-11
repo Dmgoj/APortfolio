@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using APortfolio.BLL.Helpers;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace APortfolio.BLL.Services
     public interface IPortfolioService
     {
         Task<Portfolio> GetByIdAsync(int id);
-        Task<IEnumerable<Portfolio>> GetAllAsync();
+        Task<PaginatedList<Portfolio>> GetPaginatedPortfoliosAsync(int pageNumber, int pageSize);
         Task<IEnumerable<Portfolio>> GetPortfoliosByUserIdAsync(string userId);
         Task<Portfolio?> GetPortfolioWithProjectsAsync(int id);
         Task<IEnumerable<Portfolio>> SearchPortfoliosAsync(string keyword);
