@@ -40,6 +40,10 @@ namespace APortfolio.Web
 
             builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 
+            builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+            builder.Services.AddScoped<IRatingService, RatingService>();
+
+
 
             builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();

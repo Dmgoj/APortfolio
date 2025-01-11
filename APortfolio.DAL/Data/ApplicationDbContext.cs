@@ -12,6 +12,7 @@ namespace APortfolio.DAL.Data
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<Project> Projects{ get; set; }
         public DbSet<Media> Medias { get; set; }
+        public DbSet<LikeDislike> LikesDislikes { get; set; }
 
         
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
