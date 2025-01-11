@@ -9,7 +9,6 @@ namespace APortfolio.BLL.Services
 {
     public interface IFileUploadService
     {
-        Task<string> UploadImageAsync(IFormFile imageFile);
-        Task<string> UploadVideoAsync(IFormFile videoFile);
+        Task<string> UploadMediaAsync(IFormFile imageFile);
     }
 }
