@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using APortfolio.BLL.Services;
+using System.Drawing.Printing;
 
 namespace APortfolio.Web.Controllers
 {
@@ -24,9 +25,18 @@ namespace APortfolio.Web.Controllers
         }
 
         // GET: Portfolios
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            var portfolios = await _service.GetAllAsync();
+            // Define default page size (e.g., 10 items per page)
+            const int pageSize = 10;
+
+            // Use the provided pageNumber or default to the first page
+            var pageIndex = pageNumber ?? 1;
+
+            // Fetch the paginated list
+            var portfolios = await _service.GetPaginatedPortfoliosAsync(pageIndex, pageSize);
+
+            // Pass the paginated list to the view
             return View(portfolios);
         }
 

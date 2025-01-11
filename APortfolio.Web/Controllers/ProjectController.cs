@@ -41,9 +41,9 @@ namespace APortfolio.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Project project, IFormFile imageFile)
+        public async Task<IActionResult> Create(Project project, IFormFile? imageFile)
         {
-
+            ModelState.Remove("imageFile");
             ModelState.Remove("Portfolio");
             if (ModelState.IsValid)
             {
@@ -63,15 +63,28 @@ namespace APortfolio.Web.Controllers
                 return RedirectToAction("Details", new { id = projectId });
             }
 
+            string contentType = mediaFile.ContentType;
+            string mediaUrl = null;
+            MediaType mediaType = MediaType.Document;
+
             try
             {
-                var mediaUrl = await _fileUploadService.UploadImageAsync(mediaFile);
-
-                // Optionally, add media to the project's media collection or database
+                if (contentType.StartsWith("image/"))
+                {
+                    mediaUrl = await _fileUploadService.UploadMediaAsync(mediaFile);
+                    mediaType = MediaType.Image;
+                }
+                else if (contentType.StartsWith("video/"))
+                {
+                    mediaUrl = await _fileUploadService.UploadMediaAsync(mediaFile);
+                    mediaType = MediaType.Video;
+                }
+             
                 var media = new Media
                 {
                     ProjectId = projectId,
                     Url = mediaUrl,
+                    Type = mediaType
                 };
 
                 await _projectService.AddMediaAsync(media);
