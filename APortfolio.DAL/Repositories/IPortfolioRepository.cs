@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace APortfolio.DAL.Repositories
 {
     public interface IPortfolioRepository
     {
         Task<Portfolio> GetByIdAsync(int id);
-        Task<IEnumerable<Portfolio>> GetAllAsync();
+        public IQueryable<Portfolio> GetAllAsQueryable();
         Task<IEnumerable<Portfolio>> GetPortfoliosByUserIdAsync(string userId);
         Task<Portfolio?> GetPortfolioWithProjectsAsync(int portfolioId);
         Task<IEnumerable<Portfolio>> SearchPortfoliosAsync(string keyword);
