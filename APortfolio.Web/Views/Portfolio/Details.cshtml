@@ -42,7 +42,8 @@
     <a asp-action="Index">Back to List</a>
 </div>
 <br />
-@if (User.Identity.IsAuthenticated && Model.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)){
+@if (User.Identity.IsAuthenticated && Model.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+{
 <div>
    
     <h4>Add New Project</h4>
@@ -60,7 +61,7 @@
         </div>
         <div>
             <label class="col-sm-2">Image:</label>
-            <input type="file" name="ImageFile" />
+            <input type="file" name="imageFile" />
         </div>
         <br />
         <button type="submit">Add Project</button>
@@ -72,44 +73,45 @@
     <h3>Projects</h3>
     @if (Model.Projects != null && Model.Projects.Any())
     {
-        
-       <div class="project-list row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            @foreach (var project in Model.Projects)
-            {
-              
-            <div class="col">
-                <div class="card h-100 shadow-sm">
-                    @if (!string.IsNullOrEmpty(project.ImageUrl))
-                    {
-                        <a asp-controller="Project" asp-action="Details" asp-route-id="@project.Id">
-                                <img src="@project.ImageUrl" class="card-img-top mx-auto d-block" alt="@project.Title" width="300" />
-                        </a>
-                    }
-                        <div class="card-body">
-                            <h5 class="card-title">@project.Title</h5>
-                            <p class="card-text">@project.Description</p>
-                            <p class="card-text">
-                                <small class="text-muted">Created on: @project.CreatedDate.ToShortDateString()</small>
-                            </p>
-                        </div>
-                        <div class="card-footer text-center">
-                            <a asp-controller="Project" asp-action="Details" asp-route-id="@project.Id" class="btn btn-primary btn-sm">
-                                View Details
-                            </a>
-                            @if (User.Identity.IsAuthenticated && User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
-                            {
-                                <form asp-controller="Project" asp-action="Delete" asp-route-id="@project.Id" method="post" style="display: inline;">
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
-                            }
-                        </div>
-                    </div>
+    <div class="project-list row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var project in Model.Projects)
+        {
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                @if (!string.IsNullOrEmpty(project.ImageUrl))
+                {
+                    <a asp-controller="Project" asp-action="Details" asp-route-id="@project.Id">
+                        <img src="@project.ImageUrl" class="card-img-top mx-auto d-block" alt="@project.Title" width="300" />
+                    </a>
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@project.Title</h5>
+                    <p class="card-text">@project.Description</p>
+                    <p class="card-text">
+                        <small class="text-muted">Created on: @project.CreatedDate.ToShortDateString()</small>
+                    </p>
                 </div>
-            }
-      </div>
+                <div class="card-footer text-center">
+                    <a asp-controller="Project" asp-action="Details" asp-route-id="@project.Id" class="btn btn-primary btn-sm">
+                        View Details
+                    </a>
+                    @if (User.Identity.IsAuthenticated && User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
+                    {
+                        <form asp-controller="Project" asp-action="Delete" asp-route-id="@project.Id" method="post" style="display: inline;">
+                            <button 
+                                type="submit" 
+                                class="btn btn-danger btn-sm">Delete
+                            </button>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+        }
+    </div>
     }
     else
     {
-        <p>No projects available for this portfolio.</p>
+    <p>No projects available for this portfolio.</p>
     }
 </div>

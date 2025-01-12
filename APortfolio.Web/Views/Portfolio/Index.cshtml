@@ -1,50 +1,43 @@
 ﻿@using System.Security.Claims
+@using APortfolio.BLL.Helpers
 
-@model IEnumerable<APortfolio.DAL.Entities.Portfolio>
+@model PaginatedList<Portfolio>
+
 
 @{
     ViewData["Title"] = "Portfolios";
 }
 
 <h1>Portfolios</h1>
-
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th></th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Created Date</th>
+            <th>User</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        
-    <tr>
+    @foreach (var item in Model) {
+        <tr>
             <td>
-                    <div style="display: flex; align-items: center;">
-                        <!-- Image next to the title -->
-                        <a asp-action="Details" asp-route-id="@item.Id">
-                            <img src="@item.Image" alt="Portfolio Image" style="width: 50px; height: 50px; margin-right: 10px; border-radius: 4px;" />
-                        </a>
-              <a asp-action="Details" asp-route-id="@item.Id">
+                <div style="display: flex; align-items: center;">
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <img 
+                            src="@item.Image" 
+                            alt="Portfolio Image" 
+                            style="width: 50px; height: 50px; margin-right: 10px; border-radius: 4px;" />
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.Id">
                     @Html.DisplayFor(modelItem => item.Title)
-              </a> 
-              </div>
-                </td>
-           <td>
+                    </a> 
+                </div>
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
@@ -57,11 +50,49 @@
                 @if (User.Identity.IsAuthenticated && User.FindFirstValue(ClaimTypes.NameIdentifier) == item.UserId)
                 {
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
-                @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> *@
                 <a asp-controller="Portfolio" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 }
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @if (Model.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)">Previous</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        }
+
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            if (i == Model.PageIndex)
+            {
+                <li class="page-item active"><span class="page-link">@i</span></li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-pageNumber="@i">@i</a>
+                </li>
+            }
+        }
+
+        @if (Model.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)">Next</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled"><span class="page-link">Next</span></li>
+        }
+    </ul>
+</nav>
