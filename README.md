@@ -64,3 +64,4 @@ Non-registered users can browse through available projects, while registered use
 - Create a personal portfolio.
 - Add multiple projects with photos to your portfolio.
 - Edit or delete projects and media.
+- Like or dislike media
