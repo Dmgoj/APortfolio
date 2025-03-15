@@ -1,4 +1,4 @@
-# APortfolio
+# APortfolio (Work In Progress)
 
 APortfolio is a web application inspired by Adobe Portfolio. It allows users to showcase their work by creating personalized portfolios containing multiple projects. Each project can include media such as photos, offering a seamless way to display creativity and skills.
 
